@@ -115,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function setupEventListeners() {
     menuToggle.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', closeMenu);
-    searchInput.addEventListener('input', handleSearch);
     searchButton.addEventListener('click', () => handleSearch({ target: { value: searchInput.value } }));
     
     // Close menu on escape key
