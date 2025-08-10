@@ -590,6 +590,14 @@ body {
     position: relative; 
     min-height: 40vh;   
 }
+#mealTags {
+    color: #de5f04;
+    border: 1px solid #de5f04;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
 
 
 
