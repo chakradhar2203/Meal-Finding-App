@@ -4,12 +4,11 @@ const SEARCH_API = `${API_BASE}/search.php?s=`;
 const FILTER_BY_CATEGORY_API = `${API_BASE}/filter.php?c=`;
 const MEAL_DETAILS_API = `${API_BASE}/lookup.php?i=`;
 
-// Data
+
 let categories = [];
 let recipes = [];
 let allMeals = [];
 
-// DOM Elements
 const menuToggle = document.getElementById('menuToggle');
 const sideMenu = document.getElementById('sideMenu');
 const overlay = document.getElementById('overlay');
@@ -34,9 +33,8 @@ let isMenuOpen = false;
 let currentSearchResults = [];
 let selectedCategory = '';
 let currentCategoryData = null;
-let currentView = 'home'; // 'home', 'search', 'category', 'details'
+let currentView = 'home';
 
-// API Functions
 async function fetchCategories() {
     try {
         const response = await fetch(CATEGORIES_API);
@@ -105,19 +103,15 @@ async function fetchMealDetails(mealId) {
     }
 }
 
-// Initialize
 document.addEventListener('DOMContentLoaded', function() {
     fetchCategories();
     setupEventListeners();
 });
 
-// Event Listeners
 function setupEventListeners() {
     menuToggle.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', closeMenu);
     searchButton.addEventListener('click', () => handleSearch({ target: { value: searchInput.value } }));
-    
-    // Close menu on escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && isMenuOpen) {
             closeMenu();
@@ -125,7 +119,7 @@ function setupEventListeners() {
     });
 }
 
-// Navigation Functions
+
 function goHome() {
     searchInput.value = '';
     currentView = 'home';
@@ -136,7 +130,7 @@ function goHome() {
 }
 
 function updateViewDisplay() {
-    // Hide all sections first
+   
     heroSection.style.display = 'none';
     searchResults.style.display = 'none';
     categoriesSection.style.display = 'none';
@@ -168,7 +162,7 @@ function updateViewDisplay() {
     }
 }
 
-// Menu Functions
+
 function toggleMenu() {
     isMenuOpen = !isMenuOpen;
     updateMenuState();
@@ -193,7 +187,7 @@ function updateMenuState() {
     }
 }
 
-// Search Functions
+
 async function handleSearch(e) {
     const searchTerm = e.target.value.trim();
     
@@ -202,7 +196,6 @@ async function handleSearch(e) {
         currentView = 'search';
         updateViewDisplay();
         
-        // Add this line to show the loader
         recipesGrid.innerHTML = '<div class="loader"></div>';
         
         const searchedMeals = await searchMeals(searchTerm);
@@ -210,7 +203,7 @@ async function handleSearch(e) {
         selectedCategory = '';
         currentCategoryData = null;
         resultsTitle.textContent = 'SEARCH RESULTS';
-        renderRecipes(); // This will automatically remove the loader and show results
+        renderRecipes();
     } else if (currentView === 'search') {
         goHome();
     }
@@ -224,7 +217,7 @@ async function handleCategorySelect(categoryId) {
     currentView = 'category';
     updateViewDisplay();
     
-    // Show category description
+    
     if (currentCategoryData) {
         categoryTitle.textContent = currentCategoryData.name;
         categoryDescriptionText.textContent = currentCategoryData.description;
@@ -237,7 +230,7 @@ async function handleCategorySelect(categoryId) {
     closeMenu();
 }
 
-// Meal Details Functions
+
 async function showMealDetails(mealId) {
     const meal = await fetchMealDetails(mealId);
     if (meal) {
@@ -245,19 +238,18 @@ async function showMealDetails(mealId) {
         currentView = 'details';
         breadcrumbText.textContent = meal.strMeal.toUpperCase();
         updateViewDisplay();
-        
-        // Scroll to top of meal details
+       
         mealDetailsSection.scrollIntoView({ behavior: 'smooth' });
     }
 }
 
 function displayMealDetails(meal) {
-    // Set basic info
+    
     document.getElementById('mealDetailTitle').textContent = meal.strMeal;
     document.getElementById('mealDetailImage').src = meal.strMealThumb;
     document.getElementById('mealCategory').textContent = meal.strCategory.toUpperCase();
     
-    // Set source
+ 
     if (meal.strSource) {
         document.getElementById('mealSource').href = meal.strSource;
         document.getElementById('mealSource').textContent = meal.strSource;
@@ -266,21 +258,20 @@ function displayMealDetails(meal) {
         document.getElementById('mealSource').removeAttribute('href');
     }
     
-    // Set tags
+    
     document.getElementById('mealTags').textContent = meal.strTags || 'N/A';
     
-// ...
-    // Set ingredients
+   
     const ingredientsList = document.getElementById('ingredientsList');
     ingredientsList.innerHTML = '';
-    let gridIngredientCounter = 1; // Counter for the grid items
+    let gridIngredientCounter = 1; 
     
     for (let i = 1; i <= 20; i++) {
         const ingredient = meal[`strIngredient${i}`];
         if (ingredient && ingredient.trim()) {
             const ingredientItem = document.createElement('div');
             ingredientItem.className = 'ingredient-item';
-            // Add a numbered circle and a span for the text
+           
             ingredientItem.innerHTML = `
                 <span class="grid-ingredient-number">${gridIngredientCounter}</span>
                 <span class="grid-ingredient-text">${ingredient}</span>
@@ -289,9 +280,8 @@ function displayMealDetails(meal) {
             gridIngredientCounter++;
         }
     }
-// ...
     
-    // Set measures
+  
     const measuresList = document.getElementById('measuresList');
     measuresList.innerHTML = '';
     
@@ -309,7 +299,7 @@ function displayMealDetails(meal) {
         }
     }
     
-    // Set instructions
+  
     const instructionsList = document.getElementById('instructionsList');
     instructionsList.innerHTML = '';
     
@@ -329,7 +319,7 @@ function displayMealDetails(meal) {
     }
 }
 
-// Render Functions
+
 function renderCategories() {
     categoriesGrid.innerHTML = '';
     categories.forEach(category => {
@@ -346,7 +336,7 @@ function renderMenuCategories() {
         button.addEventListener('click', () => handleCategorySelect(category.id));
         menuCategories.appendChild(button);
 
-        // Add an <hr> element after each button, except for the last one
+       
         if (index < categories.length - 1) {
             const hr = document.createElement('hr');
             menuCategories.appendChild(hr);
@@ -404,4 +394,5 @@ function createRecipeCard(recipe) {
     
     return card;
 }
+
 
