@@ -347,11 +347,19 @@ function renderMenuCategories() {
 
 function renderRecipes() {
     recipesGrid.innerHTML = '';
-    currentSearchResults.forEach(recipe => {
-        const recipeCard = createRecipeCard(recipe);
-        recipesGrid.appendChild(recipeCard);
-    });
+    if (currentSearchResults.length === 0 && currentView === 'search') {
+        const noResultsMessage = document.createElement('p');
+        noResultsMessage.textContent = 'No results found. Please try a different recipe name.';
+        noResultsMessage.className = 'no-results-message';
+        recipesGrid.appendChild(noResultsMessage);
+    } else {
+        currentSearchResults.forEach(recipe => {
+            const recipeCard = createRecipeCard(recipe);
+            recipesGrid.appendChild(recipeCard);
+        });
+    }
 }
+
 
 function createCategoryCard(category) {
     const card = document.createElement('div');
@@ -386,3 +394,4 @@ function createRecipeCard(recipe) {
     
     return card;
 }
+
