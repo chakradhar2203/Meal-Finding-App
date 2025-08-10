@@ -202,12 +202,15 @@ async function handleSearch(e) {
         currentView = 'search';
         updateViewDisplay();
         
+        // Add this line to show the loader
+        recipesGrid.innerHTML = '<div class="loader"></div>';
+        
         const searchedMeals = await searchMeals(searchTerm);
         currentSearchResults = searchedMeals;
         selectedCategory = '';
         currentCategoryData = null;
         resultsTitle.textContent = 'SEARCH RESULTS';
-        renderRecipes();
+        renderRecipes(); // This will automatically remove the loader and show results
     } else if (currentView === 'search') {
         goHome();
     }
@@ -401,3 +404,4 @@ function createRecipeCard(recipe) {
     
     return card;
 }
+
