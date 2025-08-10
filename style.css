@@ -576,7 +576,7 @@ body {
 }
 
 .loader {
-  border: 6px solid #f3f3f3; /
+  border: 6px solid #f3f3f3; 
   border-top: 6px solid #de5f04; 
   border-radius: 50%;
   width: 50px;
@@ -597,6 +597,7 @@ body {
     position: relative; 
     min-height: 40vh;   
 }
+
 
 
 
