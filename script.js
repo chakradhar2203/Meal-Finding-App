@@ -28,7 +28,6 @@ const breadcrumbNav = document.getElementById('breadcrumbNav');
 const breadcrumbText = document.getElementById('breadcrumbText');
 const mealDetailsSection = document.getElementById('mealDetailsSection');
 
-// State
 let isMenuOpen = false;
 let currentSearchResults = [];
 let selectedCategory = '';
@@ -259,24 +258,23 @@ function displayMealDetails(meal) {
     }
     
     
-// --- REPLACEMENT CODE FOR HANDLING TAGS ---
+
 
 const tagsContainer = document.getElementById('mealTagsContainer');
-tagsContainer.innerHTML = ''; // Clear previous tags
+tagsContainer.innerHTML = ''; 
 
 if (meal.strTags) {
-    const tags = meal.strTags.split(','); // Split the string into an array of tags
+    const tags = meal.strTags.split(','); 
 
     tags.forEach(tagText => {
-        if (tagText.trim()) { // Make sure the tag isn't just empty space
+        if (tagText.trim()) { 
             const tagElement = document.createElement('span');
-            tagElement.className = 'meal-tag-box'; // A class for styling each tag
+            tagElement.className = 'meal-tag-box'; 
             tagElement.textContent = tagText.trim();
             tagsContainer.appendChild(tagElement);
         }
     });
 } else {
-    // If there are no tags, you can leave it empty or add a placeholder
     tagsContainer.textContent = 'N/A';
 }
     
@@ -413,5 +411,6 @@ function createRecipeCard(recipe) {
     
     return card;
 }
+
 
 
