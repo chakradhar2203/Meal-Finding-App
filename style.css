@@ -14,6 +14,8 @@ body {
 
 
 .header {
+    position: sticky;
+    top: 0;
     background-color: #de5f04;
     padding: 1rem;
     position: relative;
@@ -21,7 +23,8 @@ body {
 }
 
 .header-content {
-    margin-inline-start: 25px;
+    margin-inline-start: 50px;
+    margin-inline-end: 20px; 
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -286,7 +289,7 @@ body {
     border-radius: 12px;
     padding: 2rem;
     margin-bottom: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid orange;
 }
 
 .category-description h3 {
@@ -358,6 +361,7 @@ body {
 }
 
 .ingredients-grid {
+    border-radius: 10px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 0.75rem;
@@ -567,6 +571,26 @@ body {
         grid-template-columns: 1fr;
     }
 }
+@media (max-width:650px){
+    .hamburger{
+        width: 14px;
+    }
+    .side-menu {
+        width: 250px;
+    }
+    .categories-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .recipes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(177px, 1fr));
+    }
+    .meal-image-section img {
+        width: 80%;
+    }
+    .ingredients-grid {
+        max-width: 320px;
+    }
+}
 
 .loader {
   border: 6px solid #f3f3f3; 
@@ -590,14 +614,33 @@ body {
     position: relative; 
     min-height: 40vh;   
 }
-#mealTags {
-    color: #de5f04;
-    border: 1px solid #de5f04;
-    padding: 5px 10px;
-    border-radius: 5px;
-    display: inline-block;
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
 }
 
+.meal-tag-box {
+    color: orangered;
+    padding: 4px 12px;
+    border-radius: 4px;
+    border: 1px solid orange;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.measures-section {
+    background-color: rgb(237, 237, 237);
+    border-radius: 10px;
+    border: 1px solid rgb(186, 186, 186);
+    padding-inline-start: 20px;
+    padding-block-start: 10px;
+}
+.instructions-section {
+    margin-top: 25px;
+}
 
 
 
