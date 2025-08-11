@@ -259,7 +259,24 @@ function displayMealDetails(meal) {
     }
     
     
-    document.getElementById('mealTags').textContent = meal.strTags || 'N/A';
+    const tagsContainer = document.getElementById('mealTagsContainer');
+tagsContainer.innerHTML = ''; 
+
+if (meal.strTags) {
+    const tags = meal.strTags.split(','); 
+
+    tags.forEach(tagText => {
+        if (tagText.trim()) { 
+            const tagElement = document.createElement('span');
+            tagElement.className = 'meal-tag-box'; 
+            tagElement.textContent = tagText.trim();
+            tagsContainer.appendChild(tagElement);
+        }
+    });
+} else {
+
+    tagsContainer.textContent = 'N/A';
+}
     
    
     const ingredientsList = document.getElementById('ingredientsList');
@@ -394,5 +411,6 @@ function createRecipeCard(recipe) {
     
     return card;
 }
+
 
 
