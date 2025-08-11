@@ -259,22 +259,24 @@ function displayMealDetails(meal) {
     }
     
     
-    const tagsContainer = document.getElementById('mealTagsContainer');
-tagsContainer.innerHTML = ''; 
+// --- REPLACEMENT CODE FOR HANDLING TAGS ---
+
+const tagsContainer = document.getElementById('mealTagsContainer');
+tagsContainer.innerHTML = ''; // Clear previous tags
 
 if (meal.strTags) {
-    const tags = meal.strTags.split(','); 
+    const tags = meal.strTags.split(','); // Split the string into an array of tags
 
     tags.forEach(tagText => {
-        if (tagText.trim()) { 
+        if (tagText.trim()) { // Make sure the tag isn't just empty space
             const tagElement = document.createElement('span');
-            tagElement.className = 'meal-tag-box'; 
+            tagElement.className = 'meal-tag-box'; // A class for styling each tag
             tagElement.textContent = tagText.trim();
             tagsContainer.appendChild(tagElement);
         }
     });
 } else {
-
+    // If there are no tags, you can leave it empty or add a placeholder
     tagsContainer.textContent = 'N/A';
 }
     
@@ -411,6 +413,5 @@ function createRecipeCard(recipe) {
     
     return card;
 }
-
 
 
